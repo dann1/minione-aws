@@ -22,7 +22,7 @@ ami_id       = "ami-0fc5d935ebf8bc3bc" # Ubuntu 2204
 volume_size  = 25
 
 ssh_key = "your_ssh_key_pair_name"
-ssh_key_path = "~/.ssh/aws_one_dclavijo.pem"
+ssh_key_path = "your_private_ssh_key_path"
 ssh_user = "ubuntu" # required by the AMI in this example
 
 one_version = "6.8"
