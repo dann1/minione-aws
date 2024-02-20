@@ -1,6 +1,7 @@
 variable "ami_id" {
   description = "The AMI ID of the instance"
   type        = string
+  default     = "ami-0fc5d935ebf8bc3bc" # ubuntu 2204
 }
 
 variable "vpc_id" {
@@ -11,11 +12,13 @@ variable "vpc_id" {
 variable "instance_type" {
   description = "The type of the instance"
   type        = string
+  default     = "t2.small"
 }
 
 variable "volume_size" {
   description = "The size of the root volume in GB"
   type        = number
+  default     = 40
 }
 
 
@@ -36,7 +39,8 @@ variable "ssh_key_path" {
 
 variable "ssh_user" {
   description = "SSH user the SSH client will connect as"
-  type = string
+  type        = string
+  default     = "ubuntu"
 }
 
 
@@ -53,14 +57,29 @@ variable "one_password" {
 variable "one_sunstone_port" {
   description = "HTTP port where OpenNebula Sunstone will be running"
   type        = number
+  default     = 9869
 }
 
 variable "one_fireedge_port" {
   description = "HTTP port where OpenNebula Sunstone will be running"
   type        = number
+  default     = 2616
 }
 
 variable "one_version" {
   description = "OpenNebula version to install"
   type        = string
+  default     = "6.4"
+}
+
+variable "one-apps-deps-deb" {
+  description = "Dependencies required by one-apps to build appliances on Debian based images. Defaults to Ubuntu package"
+  type        = string
+  default     = "bash cloud-utils genisoimage libguestfs0 libguestfs-tools make nginx qemu-utils rpm rsync ruby qemu qemu-system-x86"
+}
+
+
+variable "packer-version" {
+  type = string
+  default = "1.10.0"
 }

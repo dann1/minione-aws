@@ -17,6 +17,7 @@ resource "aws_instance" "minione" {
     host        = self.public_dns
   }
 
+  # install minione
   provisioner "remote-exec" {
     inline = [
       "sudo apt update",
@@ -24,6 +25,17 @@ resource "aws_instance" "minione" {
       "wget -O minione 'https://github.com/OpenNebula/minione/releases/latest/download/minione'",
       "chmod +x minione",
       "sudo ./minione ${var.one_ee} --password ${var.one_password} --yes --force --sunstone-port ${var.one_sunstone_port} --version ${var.one_version}"
+    ]
+  }
+
+  # install one-apps and dependencies to build Linux based appliances
+  provisioner "remote-exec" {
+    inline = [
+      "git clone https://github.com/OpenNebula/one-apps.git",
+      "sudo apt install -y ${var.one-apps-deps-deb}",
+      "wget https://releases.hashicorp.com/packer/${var.packer-version}/packer_${var.packer-version}_linux_amd64.zip",
+      "unzip ${var.packer-version}/packer_${var.packer-version}_linux_amd64.zip /usr/local/bin/packer",
+      "gem install --no-document backports fpm"
     ]
   }
 }
